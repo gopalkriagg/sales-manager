@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { getClients } from '../api/clients.api';
 import AddEditClient from '../components/AddEditClient.vue';
 export default {
   components: { AddEditClient },
@@ -45,29 +46,20 @@ export default {
           value: 'name',
         },
       ],
-      clients: [
-        {
-          name: 'Ludhiana Client',
-        },
-        {
-          name: 'Lollipop',
-        },
-        {
-          name: 'Honeycomb',
-        },
-        {
-          name: 'Donut',
-        },
-        {
-          name: 'KitKat',
-        },
-      ],
+      clients: [],
     };
   },
+  created() {
+    this.fetchClients();
+  },
   methods: {
+    async fetchClients() {
+      const response = await getClients();
+      this.clients = response.data;
+    },
     openAddClientModal() {
       this.$refs.addEditClient.open();
-    }
-  }
+    },
+  },
 };
 </script>

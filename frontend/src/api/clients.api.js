@@ -2,11 +2,14 @@ import httpClient from './httpClient';
 
 const END_POINT = 'clients';
 
+const getClients = () => {
+  return httpClient.get(END_POINT);
+};
+
 const storeClient = name => {
-  console.log(httpClient.defaults);
   return httpClient.post(END_POINT, {
     name,
   });
 };
 
-export { storeClient };
+export { getClients, storeClient };
