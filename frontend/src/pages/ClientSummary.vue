@@ -22,30 +22,37 @@
 
 <script>
 import { getClient } from '../api/clients.api';
+import { getOrdersForClient } from '../api/orders.api';
+
 export default {
   data() {
     return {
       client: {
         name: null,
-        headers: [
-          {
-            text: 'Order Date',
-            align: 'start',
-            value: 'order',
-          },
-        ],
-        orders: [],
       },
+      headers: [
+        {
+          text: 'Order Date',
+          align: 'start',
+          value: 'order',
+        },
+      ],
+      orders: [],
     };
   },
   created() {
     this.getClient();
+    this.getOrdersForClient();
   },
   methods: {
     async getClient() {
       const response = await getClient(this.$route.params.id);
       this.client = response.data;
       console.log(this.client);
+    },
+    async getOrdersForClient() {
+      const response = await getOrdersForClient(this.$route.params.id);
+      console.log(response.data);
     },
   },
 };
