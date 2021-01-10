@@ -1,17 +1,22 @@
 <template>
   <div>
-    Client Name: {{ client.name }}
-    Client Created on: sss
-    Client Edited on: asdfd
+    Client Name: {{ client.name }} <br />
+    Client Created on: sss <br />
+    Client Edited on: asdfd <br />
 
-    Total Amount
-    Last Balance Amount
-    Paid Amount
-    Balance
+    Total Amount <br />
+    Last Balance Amount <br />
+    Paid Amount <br />
+    Balance <br />
 
-    Create New Order
-    Past orders:
-
+    Create New Order <br />
+    Past orders: <br />
+    <v-data-table
+      :headers="headers"
+      :items="orders"
+      :items-per-page="5"
+      class="elevation-1"
+    />
   </div>
 </template>
 
@@ -22,6 +27,14 @@ export default {
     return {
       client: {
         name: null,
+        headers: [
+          {
+            text: 'Order Date',
+            align: 'start',
+            value: 'order',
+          },
+        ],
+        orders: [],
       },
     };
   },
@@ -33,11 +46,9 @@ export default {
       const response = await getClient(this.$route.params.id);
       this.client = response.data;
       console.log(this.client);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
