@@ -26,6 +26,7 @@ Route::get('clients', [ClientController::class, 'index']);
 Route::post('clients', [ClientController::class, 'store']);
 
 Route::get('clients/{client}/orders', [OrderController::class, 'getOrdersForClient']);
+Route::post('orders', [OrderController::class, 'store']);
 
 Route::get('products', [ProductController::class, 'index']);
 Route::post('products', [ProductController::class, 'store']);

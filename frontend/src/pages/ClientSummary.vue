@@ -11,12 +11,16 @@
 
     Create New Order <br />
     Past orders: <br />
+    <v-btn color="primary" @click="openAddEditOrderModal">
+      Add Order
+    </v-btn>
     <v-data-table
       :headers="headers"
       :items="orders"
       :items-per-page="5"
       class="elevation-1"
     />
+    <add-edit-order ref="addEditOrder" />
   </div>
 </template>
 
@@ -24,7 +28,12 @@
 import { getClient } from '../api/clients.api';
 import { getOrdersForClient } from '../api/orders.api';
 
+import AddEditOrder from '../components/AddEditOrder.vue';
+
 export default {
+  components: {
+    AddEditOrder,
+  },
   data() {
     return {
       client: {
@@ -53,6 +62,9 @@ export default {
     async getOrdersForClient() {
       const response = await getOrdersForClient(this.$route.params.id);
       console.log(response.data);
+    },
+    openAddEditOrderModal() {
+      this.$refs.addEditOrder.open();
     },
   },
 };
